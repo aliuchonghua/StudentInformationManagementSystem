@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>test</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="css/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<!--item当前对象-->
+				<!--index下标-->
+				<li v-for="(item,index) in studentlist">
+					{{index}} {{item.stuid}} {{item.name}}
+				</li>
+			</ul>
+			<input type="text" v-model="studentindex.stuid" />
+			<button type="button" v-on:click="chazhao()">查找</button>
+			<ul>
+				<li>学号:{{student.stuid}}</li>
+				<li>姓名:{{student.name}}</li>
+				<li>性别:{{student.sex}}</li>
+				<li>民族:{{student.nation}}</li>
+				<li>籍贯:{{student.addr}}</li>
+				<li>电话{{student.phone}}</li>
+				<li>密码:{{student.pass}}</li>
+			</ul>
+		</div>
+		
+	</body>
+	<script>
+		var vue=new Vue({
+			
+			el:'#app',
+			data:{
+				id:'',
+				msg:'hello',
+                studentlist:[],
+				studentindex:{
+					stuid:'',
+				},
+				student:{
+					stuid:'',
+					name:'',
+					sex:'',
+					nation:'',
+					brith:'',
+					enrol:'',
+					addr:'',
+					banid:'',
+					phone:'',	
+					pass:''
+				}
+			},
+			methods:{
+				refresh:function(){
+					axios.get('/student/listall').then(function(result){
+                        vue.studentlist=[];
+                        for(var i=0;i<result.data.length;i++){
+                            //注意vue下的数组操作一定使用push等
+                            vue.studentlist.push(result.data[i]);
+                        }
+					}).catch(function(err){
+						console.log(err)
+					});
+				},
+				chazhao:function(){
+					axios.post('/student/currentStudent',this.studentindex).then(function(result){
+						vue.student=result.data;
+					}).catch(function(err){
+						console.log(err)
+					})
+				},
+
+			},
+			mounted:function(){
+				this.refresh();
+			}
+		});
+	</script>
+</html>

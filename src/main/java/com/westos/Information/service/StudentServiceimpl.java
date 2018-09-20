@@ -47,7 +47,7 @@ public class StudentServiceimpl implements StudentService {
         Xueyuan findxueyuan = xueyuanDao.findxueyuan(xueyuan);
         return findxueyuan.getXuename();
     }
-
+//查找当前学生的专业
     @Override
     public String findzhuanye(Student student) {
         Zhuanye zhuanye=new Zhuanye();
@@ -57,7 +57,7 @@ public class StudentServiceimpl implements StudentService {
         return findzhuanye.getZhuanname();
 
     }
-
+//    查找当前学生的班级
     @Override
     public String findbanji(Student student) {
         Banji banji=new Banji();
@@ -65,5 +65,11 @@ public class StudentServiceimpl implements StudentService {
 //        查找完整的班级对象
         Banji findbanji = banjiDao.findbanji(banji);
         return findbanji.getBanname();
+    }
+
+//    修改学生的密码
+    @Override
+    public void changePass(Student student) {
+        studentDao.changePass(student);
     }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.westos.Information.dao.LoginDao">
+    <!--查找学号和密码和数据库相同的-->
+    <select id="inquiryStudent" resultType="com.westos.Information.bean.Student">
+        SELECT * FROM student WHERE stuid=#{stuid} AND pass=#{pass}
+    </select>
+
+</mapper>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>学生信息管理系统</title>
+		<link rel="stylesheet" type="text/css" href="../css/index_css.css" />
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/axios.min.js"></script>
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+
+	<body class="bod">
+		<div class="header">
+			<img class="image1" src="img/学生信息管理logo.png">
+		</div>
+		<div class="div1">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 text-center ph">
+						<p> 播种一个行动， </p>
+						<p> 你会收获一个习惯； </p>
+						<p> 播种一个习惯， </p>
+						<p> 你会收获一个个性； </p>
+						<p> 播种一个个性， </p>
+						<p> 你会收获一个命运。 </p>
+						<p> -- 普德曼 </p>
+					</div>
+					<!--中部图片-->
+					<div class="col-md-4 ph">
+						<img class="image2" src="img/7c.jpg">
+					</div>
+					<!--登陆框-->
+					<div class="col-md-4 text-center" id="app">
+						<div class="div2">
+							<div class="text-center div3">
+								<label class="label1">学生信息管理登录</label>
+							</div>
+							<div class="text-left" style="margin: 17px;">
+								<form action="" method="post">
+
+									<div>
+										<input type="text" class="form-control" placeholder="请输入学号" v-model="student.stuid" v-on:click="back()" />
+									</div>
+
+									<div class="div4">
+										<input type="password" class="form-control" placeholder="请输入密码" v-model="student.pass" v-on:click="back()"
+										 v-on:keyUp.enter="login()" />
+										<p style="color: #ff6666; font-size: 15px">{{msg}}</p>
+									</div>
+									<div class="div6">
+										<span>
+											<button type="button" class="btn btn-info btn-block" v-on:click="login()">登录</button>
+										</span>
+									</div>
+									<div style="margin: 25px;" class="text-right">
+										<a href="#">忘记密码?</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="text-center" style="padding-top:12px ;">
+				<a href="#">关于项目</a> | <a href="#">服务条款</a> | <a href="#">隐私政策</a>
+				| <a href="#">客服中心</a> | <a href="#">联系我们</a> |<a href="#"> 帮助中心</a>
+			</div>
+		</div>
+	</body>
+	<script>
+		//创建vue对象
+		var vue = new Vue({
+			el: '#app',
+			data: {
+				msg: '',
+				student: {
+					stuid: '',
+					pass: ''
+				}
+			},
+			methods: {
+				login: function() {
+					if (vue.student.stuid == '') {
+						vue.msg = '学号不能为空';
+					} else if (vue.student.pass == '') {
+						vue.msg = '密码不能为空';
+					} else {
+						axios.post('/login/stulogin', this.student).then(function(result) {
+							vue.msg = result.data;
+							if (result.data.indexOf("html") != -1) {
+								vue.msg = "";
+								window.location.href = result.data;
+							}
+						}).catch(function(err) {
+							console.log(err);
+						});
+					}
+				},
+				back: function() {
+					vue.msg = "";
+				}
+			},
+			mounted: function() {
+
+			}
+		});
+	</script>
+
+</html>

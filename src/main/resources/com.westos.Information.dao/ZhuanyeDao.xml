@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.westos.Information.dao.ZhuanyeDao">
+<!--通过zhuannid查找专业-->
+<select id="findzhuanye" resultType="com.westos.Information.bean.Zhuanye">
+        SELECT * FROM zhuanye WHERE zhuanid=#{zhuanid}
+    </select>
+</mapper>

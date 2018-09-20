@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学生信息首页</title>
+    <link rel="stylesheet" href="css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.bootstrap-dropdown-hover.min.js"></script>
+    <script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body style="background-color: #eee;">
+<div id="app" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="background-color: #fff;">
+                <!-- 顶部大图 -->
+                <div style="height: 220px; background-image: url(img/wstop.jpg);"></div>
+                <!-- 导航栏 -->
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target="#example-navbar-collapse">
+                                <span class="sr-only">切换导航</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="/login/stulogout">学生信息管理</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a href="/Student_manager.html">本人信息查询</a>
+                                </li>
+                                <li>
+                                    <a href="#">成绩查询</a>
+                                </li>
+                                <li>
+                                    <a href="/login/changePasswordinterface">密码修改</a>
+                                </li>
+                                <li>
+                                    <a href="/login/stulogout">注销</a>
+                                </li>
+                                <li class="dropdown ">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        课程查询
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">今日课表</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="#">本周课表</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div style="margin-top: 35px;">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <table class="table table-hover" style="margin: 0 10px;">
+                                <tr>
+                                    <th>姓名：</th>
+                                    <td>{{student.name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>学号：</th>
+                                    <td>{{student.stuid}}</td>
+                                </tr>
+                                <tr>
+                                    <th>性别：</th>
+                                    <td>{{student.sex}}</td>
+                                </tr>
+                                <tr>
+                                    <th>民族：</th>
+                                    <td>{{student.nation}}</td>
+                                </tr>
+                                <tr>
+                                    <th>出生年月：</th>
+                                    <td>{{student.birth}}</td>
+                                </tr>
+                                <tr>
+                                    <th>联系电话：</th>
+                                    <td>{{student.phone}}</td>
+                                </tr>
+                                <tr>
+                                    <th>学院：</th>
+                                    <td>{{student.xuename}}</td>
+                                </tr>
+                                <tr>
+                                    <th>专业：</th>
+                                    <td>{{student.zhuanname}}</td>
+                                </tr>
+                                <tr>
+                                    <th>班级：</th>
+                                    <td>{{student.banname}}</td>
+                                </tr>
+                                <tr>
+                                    <th>入学年份：</th>
+                                    <td>{{student.enrol}}</td>
+                                </tr>
+                                <tr>
+                                    <th>家庭住址：</th>
+                                    <td>{{student.addr}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- 页脚 -->
+                <div class="jumbotron text-center "
+                     style="margin-bottom: 0;margin-top: 35px;background-color: #eff4fa;padding-top: 12.5px;padding-bottom: 12.5px;">
+                    <a href="#">关于项目</a> |
+                    <a href="#">服务条款</a> |
+                    <a href="#">隐私政策</a> |
+                    <a href="#">客服中心</a> |
+                    <a href="#">联系我们</a> |
+                    <a href="#"> 帮助中心</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            student: {
+                name: '',
+                stuid: '',
+                sex: '',
+                nation: '',
+                birth: '',
+                addr: '',
+                phone: '',
+                xueid: '',
+                xuename: '',
+                zhuanid: '',
+                zhuanname: '',
+                banid: '',
+                banname: '',
+                enrol: ''
+            }
+        },
+        methods: {
+            findstudent: function () {
+                axios.get('/student/currentStudent').then(function (result) {
+                    vue.student = result.data;
+                    console.log(result.data);
+                    // 截取日期
+                    vue.student.birth = vue.student.birth.substr(0, 10);
+                    vue.student.enrol = vue.student.enrol.substr(0, 10);
+                }).catch(function (err) {
+                    console.log(err)
+                });
+            }
+        },
+        mounted: function () {
+            this.findstudent();
+        }
+    });
+</script>
+<script>
+    $('.navbar [data-toggle="dropdown"]').bootstrapDropdownHover();
+</script>
+
+</html>

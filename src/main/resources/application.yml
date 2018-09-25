@@ -1,6 +1,11 @@
 server:
 #  配置端口号
-  port: 8090
+  port: 9090
+weixin:
+  token: westos
+  appid: wxa199d182800e493f
+  appsecret: e52bbb54c7c1e9d4c04c2ccf25dc9c64
+  redirect_url: http://liuchong.free.idcfengye.com/hello/java
 #  配置mybatis
 spring:
   datasource:

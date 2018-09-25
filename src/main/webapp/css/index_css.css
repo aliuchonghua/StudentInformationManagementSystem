@@ -69,10 +69,5 @@
 			width: 298px;
 			height: 278px
 		}
-		@media only screen and (max-width:1000px ) {
-			.ph {
-				display: none;
-			}
-		}
-
+		
 

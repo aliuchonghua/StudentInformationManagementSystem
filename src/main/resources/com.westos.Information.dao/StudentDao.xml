@@ -22,6 +22,48 @@
               stuid=#{stuid}
           </where>
     </update>
+    <!--修改学生-->
+    <update id="modifyStudent" parameterType="com.westos.Information.bean.Student">
+        update student
+        <set>
+            name=#{name},
+            sex=#{sex},
+            nation=#{nation},
+            birth=#{birth},
+            addr=#{addr},
+            phone=#{phone},
+            xueid=#{xueid},
+            zhuanid=#{zhuanid},
+            banid=#{banid},
+            enrol=#{enrol}
+        </set>
+        <where>
+            stuid=#{stuid}
+        </where>
+    </update>
+
+    <!--添加学生-->
+    <insert id="addstudent" parameterType="com.westos.Information.bean.Student">
+        insert into student (stuid, name, sex, nation, birth, addr, phone, xueid, zhuanid, banid, enrol,pass)
+        values (
+        #{stuid},
+        #{name},
+        #{sex},
+        #{nation},
+        #{birth},
+        #{addr},
+        #{phone},
+        #{xueid},
+        #{zhuanid},
+        #{banid},
+        #{enrol},
+        #{pass}
+        )
+    </insert>
+
+    <delete id="deleteStudent" parameterType="com.westos.Information.bean.Student">
+        delete from student where stuid=#{stuid}
+    </delete>
 </mapper>
 
 

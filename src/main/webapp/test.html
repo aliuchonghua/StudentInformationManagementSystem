@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8" name="viewport"
+			  content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 		<title>test</title>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
 		<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
@@ -59,7 +59,7 @@
 			},
 			methods:{
 				refresh:function(){
-					axios.get('/student/listall').then(function(result){
+                    axios.get('/admin/listall').then(function (result) {
                         vue.studentlist=[];
                         for(var i=0;i<result.data.length;i++){
                             //注意vue下的数组操作一定使用push等

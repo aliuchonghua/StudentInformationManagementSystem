@@ -8,4 +8,8 @@
     <select id="findxueyuan" resultType="com.westos.Information.bean.Xueyuan">
         SELECT * FROM xueyuan WHERE xueid=#{xueid}
     </select>
+    <!--返回所有的学院-->
+    <select id="listxueyuan" resultType="com.westos.Information.bean.Xueyuan">
+        select * from xueyuan
+    </select>
 </mapper>

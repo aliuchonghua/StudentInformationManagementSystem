@@ -4,15 +4,14 @@
 <head>
     <meta charset="utf-8" name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
-    <title>个人信息</title>
+    <title>学生信息首页</title>
     <link rel="stylesheet" href="css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.bootstrap-dropdown-hover.min.js"></script>
-    <script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="css/util.css"/>
 </head>
+
 <body style="background-color: #eee;">
 <div id="app" class="container">
     <div class="row">
@@ -62,59 +61,45 @@
                                         </li>
                                     </ul>
                                 </li>
+
                             </ul>
                         </div>
                     </div>
                 </nav>
-                <div style="margin-top: 35px;">
-                    <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
-                            <table class="table table-hover" style="margin: 0 10px;">
-                                <tr>
-                                    <th>姓名：</th>
-                                    <td>{{student.name}}</td>
-                                </tr>
-                                <tr>
-                                    <th>学号：</th>
-                                    <td>{{student.stuid}}</td>
-                                </tr>
-                                <tr>
-                                    <th>性别：</th>
-                                    <td>{{student.sex}}</td>
-                                </tr>
-                                <tr>
-                                    <th>民族：</th>
-                                    <td>{{student.nation}}</td>
-                                </tr>
-                                <tr>
-                                    <th>出生年月：</th>
-                                    <td>{{student.birth}}</td>
-                                </tr>
-                                <tr>
-                                    <th>联系电话：</th>
-                                    <td>{{student.phone}}</td>
-                                </tr>
-                                <tr>
-                                    <th>学院：</th>
-                                    <td>{{student.xuename}}</td>
-                                </tr>
-                                <tr>
-                                    <th>专业：</th>
-                                    <td>{{student.zhuanname}}</td>
-                                </tr>
-                                <tr>
-                                    <th>班级：</th>
-                                    <td>{{student.banname}}</td>
-                                </tr>
-                                <tr>
-                                    <th>入学年份：</th>
-                                    <td>{{student.enrol}}</td>
-                                </tr>
-                                <tr>
-                                    <th>家庭住址：</th>
-                                    <td>{{student.addr}}</td>
-                                </tr>
-                            </table>
+                <!-- 轮播图 -->
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div style="margin-top: 35px;">
+                            <div id="myCarousel" class="carousel slide center-block"
+                                 style="width: 700px;height: 400px;">
+                                <!-- 轮播（Carousel）指标 -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                                </ol>
+                                <!-- 轮播（Carousel）项目 -->
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <img src="img/lb02.jpg">
+                                    </div>
+                                    <div class="item">
+                                        <img src="img/lb01.jpg">
+                                    </div>
+                                    <div class="item">
+                                        <img src="img/lb03.jpg">
+                                    </div>
+                                </div>
+                                <!-- 轮播（Carousel）导航 -->
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -134,44 +119,9 @@
 </div>
 </body>
 <script>
-    var vue = new Vue({
-        el: '#app',
-        data: {
-            student: {
-                name: '',
-                stuid: '',
-                sex: '',
-                nation: '',
-                birth: '',
-                addr: '',
-                phone: '',
-                xueid: '',
-                xuename: '',
-                zhuanid: '',
-                zhuanname: '',
-                banid: '',
-                banname: '',
-                enrol: ''
-            }
-        },
-        methods: {
-            findstudent: function () {
-                axios.get('/student/currentStudent').then(function (result) {
-                    vue.student = result.data;
-                    // 截取日期
-                    vue.student.birth = vue.student.birth.substr(0, 10);
-                    vue.student.enrol = vue.student.enrol.substr(0, 10);
-                }).catch(function (err) {
-                    console.log(err)
-                });
-            }
-        },
-        mounted: function () {
-            this.findstudent();
-        }
-    });
-</script>
-<script>
+    //$('[data-toggle="dropdown"]').bootstrapDropdownHover();
+    //$.fn.bootstrapDropdownHover();
+    //$('#dropdownMenu1').bootstrapDropdownHover();
     $('.navbar [data-toggle="dropdown"]').bootstrapDropdownHover();
 </script>
 

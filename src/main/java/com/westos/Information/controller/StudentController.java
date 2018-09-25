@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @RestController
 @RequestMapping("/student")
@@ -18,31 +17,15 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-
-//    返回所有的学生
-    @RequestMapping(value = "/listall",method = RequestMethod.GET)
-    public List<Student> listStudent(){
-        return studentService.listAllStudent();
-    }
-
 //  查找当前登陆的学生并封装学生的学院班级专业名
     @RequestMapping("/currentStudent")
     public Student currentStudent(HttpServletRequest request){
 
         HttpSession session = request.getSession();
-//        从session获取只包含账户信息的学生
-        Student currentStudent = (Student) session.getAttribute("currentStudent");
-//        获取当前登陆完整的学生
-        Student student = studentService.currentStudent(currentStudent);
-//        设置学生的学院名
-        String xuename = studentService.findxueyuan(student);
-        student.setXuename(xuename);
-//        设置专业名
-        String zhuanname = studentService.findzhuanye(student);
-        student.setZhuanname(zhuanname);
-//        设置班级名
-        String banname = studentService.findbanji(student);
-        student.setBanname(banname);
+//        获取当前登陆的学生
+        Student student = (Student) session.getAttribute("currentStudent");
+        //设置学生的班级专业学院的名字
+        student = studentService.settingInformation(student);
 //        替换session中的学生
         session.setAttribute("currentStudent",student);
         return student;

@@ -1,7 +1,6 @@
 package com.westos.Information.dao;
 
 import com.westos.Information.bean.Student;
-import com.westos.Information.bean.Xueyuan;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -15,4 +14,14 @@ public interface StudentDao {
     Student currentStudent(Student student);
 //  修改当前学生的密码
     Integer changePass(Student student);
+
+    //添加学生
+    void addstudent(Student student);
+
+    //删除学生
+    Integer deleteStudent(Student student);
+
+    //修改学生
+    Integer modifyStudent(Student student);
+
 }

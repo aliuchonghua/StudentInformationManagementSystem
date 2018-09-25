@@ -8,4 +8,8 @@
     <select id="findbanji" resultType="com.westos.Information.bean.Banji">
         SELECT * FROM banji WHERE banid=#{banid}
     </select>
+    <!--通过zhuanid查找班级列表-->
+    <select id="listbanji" resultType="com.westos.Information.bean.Banji">
+        SELECT * FROM banji WHERE zhuanid=#{zhuanid}
+    </select>
 </mapper>

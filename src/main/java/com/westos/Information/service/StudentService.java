@@ -17,4 +17,21 @@ public interface StudentService {
     String findbanji(Student student);
 //  修改学生的密码
     void changePass(Student student);
+
+    //    设置学生的班级专业学院的名字
+    Student settingInformation(Student student);
+
+    //判断是否存在相同的学号的学生
+    String checkStudentConflict(Student student);
+
+    //添加学生的方法
+    String addStudent(Student student);
+
+    //删除学生
+    String deleteStudent(Student student);
+
+    //修改学生
+    String modifyStudent(Student student);
+
+
 }
